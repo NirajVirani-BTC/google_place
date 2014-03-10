@@ -18,21 +18,20 @@ class PlacesController < ApplicationController
     query = main + query
 
 		url = URI.parse(query)
-		begin
-			response = Net::HTTP.start(url.host,
-			  use_ssl: true,
-			  verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|
-	      http.get url.request_uri
-	    end
-	    reply = JSON.parse response.body
-      @results = reply['results']
-      @error_message = reply['error_message']
-      logger.debug "========>#{reply} "
-	  rescue  SocketError => se
-	  end  
+
+		response = Net::HTTP.start(url.host,
+		  use_ssl: true,
+		  verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|
+      http.get url.request_uri
+    end
+    reply = JSON.parse response.body
+    @results = reply['results']
+    @error_message = reply['error_message']
+    logger.debug "========>#{reply} "  
 
   	respond_to do |format|
-      format.js 
+      format.js
+      format.html 
     end
 	end
 end
