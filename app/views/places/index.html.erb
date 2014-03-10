@@ -1,0 +1,12 @@
+Search for places near a given address.
+
+<%= form_tag locations_path, method: :get, remote: true do %>
+  <p>
+    <%= text_field_tag :search, params[:search],
+     autofocus: true, placeholder: 'Address' %>
+    <%= submit_tag "Search Near", id: 'submit' %>
+  </p>
+<% end %>
+<hr>
+<h2>Results</h2>
+<div id='results'/>
