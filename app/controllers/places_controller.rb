@@ -1,5 +1,6 @@
 class PlacesController < ApplicationController
   require 'net/http'
+  respond_to :js
 
   def index
 	  if params[:search].present?
@@ -27,10 +28,6 @@ class PlacesController < ApplicationController
     reply = JSON.parse response.body
     @results = reply['results']
     @error_message = reply['error_message']
-    logger.debug "========>#{reply} "  
-
-  	respond_to do |format|
-      format.js  
-    end
+    logger.debug "========>#{reply} "
 	end
 end
