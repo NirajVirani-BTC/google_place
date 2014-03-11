@@ -30,9 +30,6 @@ class PlacesController < ApplicationController
     @error_message = reply['error_message']
     logger.debug "========>#{reply} "  
 
-  	respond_to do |format|
-      format.json
-      format.js  
-    end
+  	respond_to :js
 	end
 end
